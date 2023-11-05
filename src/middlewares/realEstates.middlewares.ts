@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import Address from "../entities/addresses.entity";
+import Address from "../entities/Address.entity";
 import { addressesRepo } from "../repositories";
 import AppError from "../errors/AppErrors.error";
 export const verifyAddressExists = async (req: Request, res: Response, next: NextFunction):Promise<void> => {

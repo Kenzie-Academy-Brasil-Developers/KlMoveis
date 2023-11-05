@@ -1,8 +1,9 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import Schedules from "./schedules.entity";
+import { BeforeInsert, BeforeUpdate, Column, CreateDateColumn, DeleteDateColumn, Entity,  ManyToOne,  PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import Schedules from "./Schedule.entity";
+import { getRounds, hashSync } from "bcryptjs";
 
 @Entity('users')
-export default class User{
+ class User{
     @PrimaryGeneratedColumn('increment')
     id: Number
 
@@ -30,5 +31,16 @@ export default class User{
     @ManyToOne(() =>  Schedules, (schedules => schedules.user))
     schedules: Schedules[]
 
+    @BeforeInsert()
+  @BeforeUpdate()
+  hashPassword() {
+    const hasRounds: number = getRounds(this.password)
+
+    if(!hasRounds) {
+      this.password = hashSync(this.password, 10)
+    }
+  }
     
 }
+
+export default User;

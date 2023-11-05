@@ -1,10 +1,10 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "./data-source";
-import Category from "./entities/categories.entity";
-import Address from "./entities/addresses.entity";
-import User from "./entities/users.entity";
-import RealEstate from "./entities/realEstates.entity";
-import Schedule from "./entities/schedules.entity";
+import Category from "./entities/Category.entity";
+import Address from "./entities/Address.entity";
+import User from "./entities/User.entity";
+import RealEstate from "./entities/RealEstate.entity";
+import Schedule from "./entities/Schedule.entity";
 
 export const categoriesRepo: Repository<Category> = AppDataSource.getRepository(Category)
 export const addressesRepo: Repository<Address> = AppDataSource.getRepository(Address)

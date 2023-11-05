@@ -1,10 +1,10 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import Schedules from "./schedules.entity";
-import Addresses from "./addresses.entity";
-import Categories from "./categories.entity";
+import Schedules from "./Schedule.entity";
+import Addresses from "./Address.entity";
+import Categories from "./Category.entity";
 
 @Entity('realEstates')
-export default class RealEstate{
+ class RealEstate{
     @PrimaryGeneratedColumn('increment')
     id: number
 
@@ -34,3 +34,5 @@ export default class RealEstate{
     @ManyToOne(() => Categories, (categories) => categories.realEstates)
     categories: Categories
 }
+
+export default RealEstate;

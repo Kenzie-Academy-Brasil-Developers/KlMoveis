@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
-import RealEstate from "../entities/realEstates.entity";
+import RealEstate from "../entities/RealEstate.entity";
 import { realEstateRepo, scheduleRepo } from "../repositories";
 import AppError from "../errors/AppErrors.error";
-import Schedule from "../entities/schedules.entity";
+import Schedule from "../entities/Schedule.entity";
 import { number } from "zod";
 
 export const verifyRealEstatesExists = async (req: Request, res: Response, next: NextFunction):Promise<void> => {

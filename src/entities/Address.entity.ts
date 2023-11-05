@@ -1,8 +1,8 @@
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import RealEstates from "./realEstates.entity";
+import RealEstates from "./RealEstate.entity";
 
 @Entity('addresses')
-export default class Address{
+ class Address{
     @PrimaryGeneratedColumn('increment')
     id: number
 
@@ -29,3 +29,5 @@ export default class Address{
     @OneToOne(() => RealEstates, (realEstates) => realEstates.addresses)
     realEstates: string
 }
+
+export default Address;

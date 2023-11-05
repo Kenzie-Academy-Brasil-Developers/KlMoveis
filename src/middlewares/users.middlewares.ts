@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import AppError from "../errors/AppErrors.error";
-import User from "../entities/users.entity";
+import User from "../entities/User.entity";
 import { userRepo } from "../repositories";
 
 export const verifyUniqueUserEmail = async (req: Request, res: Response, next: NextFunction):Promise<void> => {
