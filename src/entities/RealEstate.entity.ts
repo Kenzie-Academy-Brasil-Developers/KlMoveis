@@ -2,17 +2,23 @@ import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, One
 import Schedules from "./Schedule.entity";
 import Addresses from "./Address.entity";
 import Categories from "./Category.entity";
+import Address from "./Address.entity";
+import Category from "./Category.entity";
+import Schedule from "./Schedule.entity";
 
 @Entity('realEstates')
  class RealEstate{
     @PrimaryGeneratedColumn('increment')
     id: number
 
-    @Column()
+
+    @Column({type: "boolean", default: false})
     sold: boolean
 
-    @Column()
-    value: number
+
+    @Column({type: "decimal", precision: 12, scale: 2, default: 0})
+    value: number | string
+
 
     @Column()
     size: number
@@ -21,18 +27,22 @@ import Categories from "./Category.entity";
     @CreateDateColumn({ type: 'date' })
     createdAt: string
   
+
     @UpdateDateColumn({ type: 'date' })
     updatedAt: string
 
-    @OneToMany(() => Schedules, (schedules) => schedules.realEstates)
-    schedules: Schedules[]
 
-    @OneToOne(() => Addresses, (addresses) => addresses.realEstates)
+    @OneToMany(() => Schedule, (schedules) => schedules.realEstate)
+    schedules: Schedule[]
+
+
+    @OneToOne(() => Address, (address) => address.realEstate)
     @JoinColumn()
-    addresses: Addresses
+    address: Address
 
-    @ManyToOne(() => Categories, (categories) => categories.realEstates)
-    categories: Categories
+    
+    @ManyToOne(() => Category, (category) => category.realEstate)
+    category: Category
 }
 
 export default RealEstate;

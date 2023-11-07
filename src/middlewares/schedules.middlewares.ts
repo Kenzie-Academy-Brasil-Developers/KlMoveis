@@ -3,32 +3,34 @@ import RealEstate from "../entities/RealEstate.entity";
 import { realEstateRepo, scheduleRepo } from "../repositories";
 import AppError from "../errors/AppErrors.error";
 import Schedule from "../entities/Schedule.entity";
-import { number } from "zod";
 
 export const verifyRealEstatesExists = async (req: Request, res: Response, next: NextFunction):Promise<void> => {
-    const {realEstateld} = req.body
+    const {realEstateId} = req.body
     const realEstate: RealEstate | null = await realEstateRepo.findOne({
         where: {
-            id: Number(realEstateld)
+            id: Number(realEstateId)
         }
     })
-    if(!realEstate) throw new AppError('RealEstate not found', 404)
+    if(!realEstate) throw new AppError("RealEstate not found", 404)
+
 
     return next()
 }
 
 export const verifyRealEstateScheduleExists =  async (req: Request, res: Response, next: NextFunction):Promise<void> => {
-    const {realEstateld, hour, date} = req.body
+    const {realEstateId, hour, date} = req.body
     const schedules: Schedule | null  = await scheduleRepo.findOne({
         where: {
-            realEstates: {
-                id: Number(realEstateld)
+            realEstate: {
+                id: Number(realEstateId)
             }, 
             hour,
             date
         }
     })
-    if(schedules) throw new AppError('Schedules nao existe', 409)
+    if(schedules) throw new AppError("Schedule to this real estate at this date and time already exists", 409)
+
+
     return next()
 }
 
@@ -46,7 +48,8 @@ export const verifyUserScheduleExists = async (req: Request, res: Response, next
         },
     })
 
-    if(schedule) throw new AppError('mensagem de erro schedules', 409)
+    if(schedule) throw new AppError("User schedule to this real estate at this date and time already exists", 409)
 
+    
     return next()
 }

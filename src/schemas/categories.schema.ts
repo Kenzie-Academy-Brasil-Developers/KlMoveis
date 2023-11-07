@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
 const categoriesSchema = z.object({
-    id: z.number().positive(),
+    id: z.number().int().positive(),
     name: z.string().max(45)
 })
 

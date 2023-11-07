@@ -1,5 +1,6 @@
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import RealEstates from "./RealEstate.entity";
+import RealEstate from "./RealEstate.entity";
 
 @Entity('addresses')
  class Address{
@@ -26,8 +27,9 @@ import RealEstates from "./RealEstate.entity";
     @Column({length: 2})
     state: string
 
-    @OneToOne(() => RealEstates, (realEstates) => realEstates.addresses)
-    realEstates: string
+    
+    @OneToOne(() => RealEstate, (realEstate) => realEstate.address)
+    realEstate: RealEstate
 }
 
 export default Address;
